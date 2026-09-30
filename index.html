@@ -1,8 +1,925 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-HK" class="scroll-smooth">
 <head>
-    <title>Mathsncode</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATHSNCODE EDUCATION CENTRE | 中小學編程及數學專家</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0B1120',
+                            navy: '#0F172A',
+                            slate: '#1E293B',
+                            cyan: '#06B6D4',
+                            blue: '#0284C7',
+                            amber: '#F59E0B',
+                            lightBg: '#F8FAFC'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #38BDF8 0%, #818CF8 50%, #C084FC 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-effect {
+            box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.25);
+        }
+        .math-pattern {
+            background-image: radial-gradient(rgba(56, 189, 248, 0.12) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
 </head>
-<body>
-    <h1>Hello Joey and Angie! 20260930 11:12am</h1>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased selection:bg-brand-cyan selection:text-brand-dark">
+
+    <!-- Sticky Navbar -->
+    <header class="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-brand-dark/80 backdrop-blur-md transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-cyan flex items-center justify-center text-white font-black text-xl shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent block">MATHSNCODE</span>
+                        <span class="text-xs font-medium text-cyan-400 tracking-widest block uppercase">Education Centre</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Navigation -->
+                <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-slate-300 hover:text-cyan-400 transition-colors">關於中心</a>
+                    <a href="#master-wong" class="text-slate-300 hover:text-cyan-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-crown text-amber-400 text-xs"></i> 首席名師</a>
+                    <a href="#courses" class="text-slate-300 hover:text-cyan-400 transition-colors">課程特點</a>
+                    <a href="#advantages" class="text-slate-300 hover:text-cyan-400 transition-colors">6 大優勢</a>
+                    <a href="#faq" class="text-slate-300 hover:text-cyan-400 transition-colors">常見問題</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden sm:flex items-center gap-4">
+                    <a href="#booking" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-md hover:shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>免費試堂評估</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" type="button" class="lg:hidden text-slate-400 hover:text-white focus:outline-none p-2 rounded-lg" aria-label="開啟選單">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-800 bg-brand-navy px-4 pt-4 pb-6 space-y-3">
+            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-cyan-400">關於中心</a>
+            <a href="#master-wong" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-cyan-400">首席名師 - 黃老師</a>
+            <a href="#courses" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-cyan-400">課程特點</a>
+            <a href="#advantages" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-cyan-400">6 大優勢</a>
+            <a href="#faq" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-cyan-400">常見問題</a>
+            <a href="#booking" class="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold">預約首堂免費體驗</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-32 math-pattern">
+        <!-- Glow accents -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 blur-[140px] rounded-full pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-[300px] h-[300px] bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                
+                <!-- Special Offer Banner -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-sm font-semibold mb-8 shadow-inner animate-pulse">
+                    <span class="flex h-2.5 w-2.5 rounded-full bg-cyan-400"></span>
+                    <span>🎉 試業期間 ‧ 免費評估及首堂免費！</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight sm:leading-none mb-6">
+                    <span class="block text-slate-100">MATHSNCODE</span>
+                    <span class="text-gradient block mt-2">🚀 新思維 ‧ 創未來</span>
+                </h1>
+
+                <!-- Tagline Badge -->
+                <div class="text-lg sm:text-2xl font-bold text-amber-400 mb-6 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>中小學編程及數學專家</span>
+                </div>
+
+                <!-- Bio Intro Paragraph -->
+                <p class="text-slate-300 text-base sm:text-lg lg:text-xl leading-relaxed mb-10 max-w-3xl mx-auto font-light">
+                    我們是一家打破傳統、注入現代科技元素的教育中心。我們堅信，未來的精英不僅要精通<strong class="text-white font-semibold">數學運算</strong>，更要具備<strong class="text-cyan-300 font-semibold">編程的邏輯思維</strong>。
+                </p>
+
+                <!-- Action CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-16">
+                    <a href="#booking" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-lg shadow-lg shadow-cyan-500/30 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-rocket"></i>
+                        <span>免費預約評估 / 試堂</span>
+                    </a>
+                    <a href="#courses" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-slate-500 font-semibold text-lg transition-all flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>探索課程特點</span>
+                    </a>
+                </div>
+
+                <!-- Key Metrics Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-8 border-t border-slate-800/80">
+                    <div class="glass-card p-6 rounded-2xl text-center hover:border-cyan-500/30 transition-all">
+                        <div class="text-amber-400 text-3xl font-black mb-1">20 年+</div>
+                        <div class="text-slate-400 text-sm font-medium">深耕香港補習界</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl text-center hover:border-cyan-500/30 transition-all">
+                        <div class="text-cyan-400 text-3xl font-black mb-1">95%</div>
+                        <div class="text-slate-400 text-sm font-medium">學生合格率 (專科專教)</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl text-center hover:border-cyan-500/30 transition-all">
+                        <div class="text-indigo-400 text-3xl font-black mb-1">1:3</div>
+                        <div class="text-slate-400 text-sm font-medium">極緻小班教學</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Master Wong Profile Section -->
+    <section id="master-wong" class="py-20 bg-brand-navy relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Title -->
+            <div class="text-center mb-16">
+                <span class="text-amber-400 font-bold tracking-widest uppercase text-sm">Traditional x Modern Excellence</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2 flex items-center justify-center gap-3">
+                    <span>💎 首席名師簡介：黃老師</span>
+                    <span class="text-cyan-400 font-serif italic text-2xl sm:text-4xl">(Master Wong)</span>
+                </h2>
+                <p class="text-slate-400 mt-4 text-base sm:text-lg max-w-2xl mx-auto">
+                    傳統與創新的完美結合，用經驗與成績說話的老師。
+                </p>
+            </div>
+
+            <!-- Profile Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Left: Teacher Visual Badge Card -->
+                <div class="lg:col-span-5">
+                    <div class="glass-card p-8 rounded-3xl relative overflow-hidden border border-cyan-500/20 glow-effect">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl"></div>
+                        <div class="text-center">
+                            <!-- Avatar Placeholder Icon Container -->
+                            <div class="w-32 h-32 mx-auto rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-600 p-1 mb-6 shadow-xl">
+                                <div class="w-full h-full bg-slate-900 rounded-full flex items-center justify-center text-5xl text-cyan-300">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-1">黃老師 Master Wong</h3>
+                            <p class="text-cyan-400 font-medium text-sm mb-4">數學專科首席導師 ‧ 教學總監</p>
+                            
+                            <!-- Master Tag Badge -->
+                            <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-300 px-4 py-1.5 rounded-full text-xs font-semibold mb-6">
+                                <i class="fa-solid fa-graduation-cap"></i> 香港中文大學碩士 (CUHK Master)
+                            </div>
+
+                            <!-- Quote -->
+                            <div class="border-t border-slate-800 pt-6 text-left">
+                                <p class="text-slate-300 text-sm italic leading-relaxed">
+                                    「數學不是死記硬背，而是理解邏輯的鑰匙；編程不是冷冰冰的代碼，而是創造未來的工具。」
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: 4 Core Pillars / Stats -->
+                <div class="lg:col-span-7 space-y-4">
+                    
+                    <!-- Card 1: Academic Authority -->
+                    <div class="glass-card p-6 rounded-2xl flex items-start gap-5 hover:border-cyan-500/40 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-university"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">學術權威</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                <strong class="text-cyan-300">香港中文大學碩士畢業</strong>，學術根基深厚，具備高度嚴謹的教學體系與教學哲學。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Track Record -->
+                    <div class="glass-card p-6 rounded-2xl flex items-start gap-5 hover:border-amber-500/40 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">戰績彪炳</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                深耕補習界 <strong class="text-amber-300">20 年</strong>，成功培育出數百名成績優異、名校畢業的學生，更有學生深受啟發<strong class="text-white">現亦任職教師</strong>，桃李滿門。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Exam Expert -->
+                    <div class="glass-card p-6 rounded-2xl flex items-start gap-5 hover:border-indigo-500/40 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">考評專家</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                對香港中小學數學課程及考試評分準則瞭如指掌，能迅速診斷學生學習痛點，精準評級與拔尖補底。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: High Pass Rate -->
+                    <div class="glass-card p-6 rounded-2xl flex items-start gap-5 hover:border-emerald-500/40 transition-all group">
+                        <div class="w-14 h-14 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">逆天勝率</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                業界極少數能持續維持 <strong class="text-emerald-400 text-base">95% 學生合格率</strong> 的真正專科專教名師，實力有目共睹。
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Highlights Section -->
+    <section id="courses" class="py-20 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-cyan-400 font-bold tracking-widest uppercase text-sm">Key Features</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">🎯 我們的課程特點</h2>
+                <p class="text-slate-400 mt-4 text-base sm:text-lg max-w-2xl mx-auto">
+                    融合邏輯編程與專業數學，專為中小學生打造的高效學習法
+                </p>
+            </div>
+
+            <!-- Grid of 6 Course Features -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Feature 1: Programming -->
+                <div class="glass-card p-8 rounded-3xl relative hover:border-cyan-500/50 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-3xl mb-6 group-hover:bg-cyan-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">編程課程</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        培養運算思維（Computational Thinking），提升邏輯建構與獨立問題解決能力，為科技時代奠定基礎。
+                    </p>
+                </div>
+
+                <!-- Feature 2: Math Specialist -->
+                <div class="glass-card p-8 rounded-3xl relative hover:border-blue-500/50 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-3xl mb-6 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">數學專科</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        黃老師親自操刀，傳授獨家快速解題技巧，將複雜幾何與代數概念化繁為簡，瞬間打通思維盲點。
+                    </p>
+                </div>
+
+                <!-- Feature 3: Modern Pedagogy -->
+                <div class="glass-card p-8 rounded-3xl relative hover:border-indigo-500/50 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-3xl mb-6 group-hover:bg-indigo-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">與時並進</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        新派教學法，減少機械式練習，拒絕死記硬背。課堂互動性高，重燃學生對數字與邏輯的學習興趣。
+                    </p>
+                </div>
+
+                <!-- Feature 4: 1:3 Small Class -->
+                <div class="glass-card p-8 rounded-3xl relative hover:border-amber-500/50 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-3xl mb-6 group-hover:bg-amber-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">1:3 極緻小班</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        每班最多 3 位學生！導師精準照顧每位學生的學習進度，因材施教，完美照顧個別差異，拒絕傳統大班被忽視。
+                    </p>
+                </div>
+
+                <!-- Feature 5: Custom Worksheets -->
+                <div class="glass-card p-8 rounded-3xl relative hover:border-purple-500/50 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-3xl mb-6 group-hover:bg-purple-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">獨家自製教材</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        精心編製自家工作紙。內容由黃老師親自設計，融入奧數思維元素，兼顧校內考試與深度潛能啟發。
+                    </p>
+                </div>
+
+                <!-- Feature 6: Free Trial -->
+                <div class="glass-card p-8 rounded-3xl relative hover:border-emerald-500/50 transition-all group">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-3xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">免費體驗</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        試業期間特別優惠：免費學術程度評估及首堂免費體驗，零成本親身體驗高質素課堂。
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Grade & Course Explorer -->
+    <section class="py-16 bg-brand-navy border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h3 class="text-2xl sm:text-3xl font-bold text-white">按年級探索合適課程</h3>
+                <p class="text-slate-400 text-sm mt-2">選擇學生現時年級，了解專屬教學方向</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex justify-center gap-3 mb-8 flex-wrap">
+                <button onclick="switchTab('primary')" id="tab-primary" class="tab-btn px-6 py-2.5 rounded-full font-semibold text-sm transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg">
+                    <i class="fa-solid fa-child mr-2"></i> 小學專區 (P.1 - P.6)
+                </button>
+                <button onclick="switchTab('secondary')" id="tab-secondary" class="tab-btn px-6 py-2.5 rounded-full font-semibold text-sm transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">
+                    <i class="fa-solid fa-user-graduate mr-2"></i> 中學專區 (S.1 - S.6)
+                </button>
+                <button onclick="switchTab('coding')" id="tab-coding" class="tab-btn px-6 py-2.5 rounded-full font-semibold text-sm transition-all bg-slate-800 text-slate-300 hover:bg-slate-700">
+                    <i class="fa-solid fa-code mr-2"></i> 專科編程 (All Grades)
+                </button>
+            </div>
+
+            <!-- Tab Content Display -->
+            <div id="tab-content" class="glass-card p-8 rounded-3xl max-w-4xl mx-auto">
+                <!-- Content inserted via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose MATHSNCODE Section (6 Core Advantages) -->
+    <section id="advantages" class="py-20 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16">
+                <span class="text-amber-400 font-bold tracking-widest uppercase text-sm">Why Choose Us</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">為何選擇 MATHSNCODE？</h2>
+                <p class="text-slate-400 mt-4 text-base sm:text-lg max-w-2xl mx-auto">
+                    打破傳統補習盲點，提供最貼心、專業且具實效的教育方案
+                </p>
+            </div>
+
+            <!-- 6 Advantages Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Advantage 1 -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-3xl font-black text-cyan-400/30">01</span>
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">教師經驗豐富</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            黃老師深耕補習界 20 年，成功培育出數百名學生，更有學生深受啟發現為教師，教學熱誠與實力兼備。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Advantage 2 -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-3xl font-black text-blue-400/30">02</span>
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-handshake"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">實體課堂互動</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            AI 亦難以取代真實人際互動。實體課堂中，導師能即時洞察學生眼神疑惑，問題即時解答，互動性極高。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Advantage 3 -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-3xl font-black text-indigo-400/30">03</span>
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">獨家自製教材</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            工作紙內容由黃老師親自精心設計，針對最新考評趨勢，絕對不是坊間充斥的普通補充練習可比。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Advantage 4 -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-3xl font-black text-amber-400/30">04</span>
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">時間彈性靈活</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            採 1:3 極緻小班教學，沒有硬性規定小學或中學的指定固執上課時間，方便家長彈性安排行程。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Advantage 5 -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-3xl font-black text-purple-400/30">05</span>
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-face-smile"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">氣氛融洽無壓</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            上堂氣氛輕鬆融洽，功課量適中，精準而不繁重，不會對學生構成額外精神壓力，引發自主學習動力。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Advantage 6 -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-3xl font-black text-rose-400/30">06</span>
+                            <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">改善親子關係</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            親自替子女溫習容易產生摩擦破壞親子關係；「專業事交給專業人」，解開溫習枷鎖，重拾和諧家庭氛圍。
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Special Spotlight Section: Parents Focus -->
+    <section class="py-16 bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border-y border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-amber-500/30 text-center relative overflow-hidden">
+                <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl"></div>
+                <i class="fa-solid fa-house-chimney-window text-4xl text-amber-400 mb-4 inline-block"></i>
+                <h3 class="text-2xl sm:text-4xl font-extrabold text-white mb-4">
+                    把溫習壓力交給我們，把歡笑還給家庭 🏡
+                </h3>
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto mb-8 font-light">
+                    許多家長在指導子女數學功課時常常引發情緒對立，破壞親子關係。「專業事交給專業人」，讓黃老師以 20 年專業經驗為孩子梳理邏輯，家長只需專注陪伴成長！
+                </p>
+                <a href="#booking" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-base transition-all transform hover:scale-105 shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-comments"></i> 立即預約免費學術諮詢
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Trial Booking Section -->
+    <section id="booking" class="py-20 bg-brand-dark relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-12">
+                <span class="text-cyan-400 font-bold tracking-widest uppercase text-sm">Special Trial Offer</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">免費預約學術評估及首堂試課</h2>
+                <p class="text-slate-400 mt-4 text-base">填寫以下簡單資料，我們的課程顧問將於 24 小時內與您聯絡安排時間</p>
+            </div>
+
+            <!-- Booking Form Card -->
+            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-cyan-500/30 shadow-2xl">
+                <form id="trial-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Parent Name -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">家長姓名 <span class="text-rose-500">*</span></label>
+                            <input type="text" id="parent-name" required placeholder="例如：陳先生 / 陳太太" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors">
+                        </div>
+
+                        <!-- Phone / WhatsApp -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">聯絡電話 / WhatsApp <span class="text-rose-500">*</span></label>
+                            <input type="tel" id="parent-phone" required placeholder="例如：9123 4567" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Student Grade -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">學生現時年級 <span class="text-rose-500">*</span></label>
+                            <select id="student-grade" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400 transition-colors">
+                                <option value="" disabled selected>請選擇年級</option>
+                                <optgroup label="小學部">
+                                    <option value="小一 (P.1)">小一 (P.1)</option>
+                                    <option value="小二 (P.2)">小二 (P.2)</option>
+                                    <option value="小三 (P.3)">小三 (P.3)</option>
+                                    <option value="小四 (P.4)">小四 (P.4)</option>
+                                    <option value="小五 (P.5)">小五 (P.5)</option>
+                                    <option value="小六 (P.6)">小六 (P.6)</option>
+                                </optgroup>
+                                <optgroup label="中學部">
+                                    <option value="中一 (S.1)">中一 (S.1)</option>
+                                    <option value="中二 (S.2)">中二 (S.2)</option>
+                                    <option value="中三 (S.3)">中三 (S.3)</option>
+                                    <option value="中四 (S.4)">中四 (S.4)</option>
+                                    <option value="中五 (S.5)">中五 (S.5)</option>
+                                    <option value="中六 (S.6)">中六 (S.6)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <!-- Subject Interested -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">意向課程 <span class="text-rose-500">*</span></label>
+                            <select id="course-interest" required class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400 transition-colors">
+                                <option value="數學專科 + 編程邏輯 (雙修優惠)">數學專科 + 編程邏輯 (建議選購)</option>
+                                <option value="數學專科課程">數學專科課程</option>
+                                <option value="編程及運算思維課程">編程及運算思維課程</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Preferred Time Window -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">希望預約評估/試堂時段</label>
+                        <select id="preferred-time" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400 transition-colors">
+                            <option value="平日下午 (15:00 - 18:00)">平日下午 (15:00 - 18:00)</option>
+                            <option value="平日晚間 (18:00 - 20:30)">平日晚間 (18:00 - 20:30)</option>
+                            <option value="星期六全日">星期六全日</option>
+                            <option value="星期日全日">星期日全日</option>
+                        </select>
+                    </div>
+
+                    <!-- Additional Remarks -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">其他備註 / 學習痛點 (選填)</label>
+                        <textarea id="remarks" rows="3" placeholder="例如：數學幾何概念較弱，或想培養編程興趣..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-extrabold text-lg shadow-xl shadow-cyan-500/20 transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> 提交預約 (即享首堂免費優惠)
+                    </button>
+
+                    <p class="text-xs text-slate-400 text-center">
+                        <i class="fa-solid fa-lock mr-1"></i> 我們承諾嚴格保密家長個人資料，僅供聯絡預約用途。
+                    </p>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-brand-navy">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-cyan-400 font-bold tracking-widest uppercase text-sm">Got Questions?</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">常見問題 FAQ</h2>
+                <p class="text-slate-400 mt-4 text-base">解答家長最關心的課堂與安排疑問</p>
+            </div>
+
+            <!-- Accordions Container -->
+            <div class="space-y-4">
+                
+                <!-- FAQ Item 1 -->
+                <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+                    <button onclick="toggleFaq(1)" class="w-full p-6 text-left font-bold text-lg text-white flex justify-between items-center hover:text-cyan-400 transition-colors">
+                        <span>1. 1:3 小班教學的時間如何安排？</span>
+                        <i id="faq-icon-1" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-1" class="hidden px-6 pb-6 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50 pt-4">
+                        由於我們採用極緻 1:3 小班模式，上課時間非常彈性！我們沒有硬性規定小學或中學的固定時段，家長可根據學生的校日程及興趣班時間，與我們溝通彈性安排每週固定上課時段。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+                    <button onclick="toggleFaq(2)" class="w-full p-6 text-left font-bold text-lg text-white flex justify-between items-center hover:text-cyan-400 transition-colors">
+                        <span>2. 自製教材與坊間補充練習有何不同？</span>
+                        <i id="faq-icon-2" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-2" class="hidden px-6 pb-6 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50 pt-4">
+                        坊間練習多為機械式重複操練，容易令學生厭倦。黃老師親自編寫的工作紙結合了 20 年考評經驗，將複雜概念拆解，並特別融入奧數思維元素，能同時提升學生校內成績與深度邏輯推理能力。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+                    <button onclick="toggleFaq(3)" class="w-full p-6 text-left font-bold text-lg text-white flex justify-between items-center hover:text-cyan-400 transition-colors">
+                        <span>3. 免費體驗課堂包含甚麼內容？</span>
+                        <i id="faq-icon-3" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-3" class="hidden px-6 pb-6 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50 pt-4">
+                        免費體驗包括：(1) 專人為學生進行 15-20 分鐘的學術程度與邏輯思考評估；(2) 1 堂完整的 1:3 實體試聽課堂，讓學生親身體驗黃老師的解題風格與互動課堂氣氛。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+                    <button onclick="toggleFaq(4)" class="w-full p-6 text-left font-bold text-lg text-white flex justify-between items-center hover:text-cyan-400 transition-colors">
+                        <span>4. 孩子完全沒有編程基礎，可以報讀編程課程嗎？</span>
+                        <i id="faq-icon-4" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-answer-4" class="hidden px-6 pb-6 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50 pt-4">
+                        完全可以！我們的編程課程專為中小學生設計，由淺入深，從小學的圖像化邏輯編程，到中學演算法設計，因材施教，重點培養運算思維與解難能力。
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-brand-dark border-t border-slate-800 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                
+                <!-- Col 1: Brand -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-cyan flex items-center justify-center text-white font-black text-lg">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <span class="text-xl font-extrabold text-white tracking-wider">MATHSNCODE</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-md mb-4">
+                        打破傳統、注入現代科技元素的教育中心。專業數學導師與編程專家攜手，培育具備邏輯思維的未來精英。
+                    </p>
+                    <p class="text-amber-400 text-xs font-semibold">
+                        💎 首席名師：黃老師 Master Wong（香港中文大學碩士，深耕補習界 20 年）
+                    </p>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">快速連結</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:text-cyan-400 transition-colors">關於中心</a></li>
+                        <li><a href="#master-wong" class="hover:text-cyan-400 transition-colors">黃老師簡介</a></li>
+                        <li><a href="#courses" class="hover:text-cyan-400 transition-colors">課程特點</a></li>
+                        <li><a href="#advantages" class="hover:text-cyan-400 transition-colors">6 大優勢</a></li>
+                        <li><a href="#booking" class="hover:text-cyan-400 transition-colors">預約免費試堂</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">聯絡我們</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap text-cyan-400"></i>
+                            <span>MATHSNCODE EDUCATION CENTRE</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
+                            <span>即時 WhatsApp 查詢預約</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-users-viewfinder text-amber-400"></i>
+                            <span>1:3 極緻小班 ‧ 專科專教</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-800/80 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>&copy; 2026 MATHSNCODE EDUCATION CENTRE. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">🚀 新思維 ‧ 創未來｜中小學編程及數學專家</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/?text=你好，我想查詢MATHSNCODE教育中心的免費數學/編程評估及免費試課安排！" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center text-3xl shadow-2xl shadow-emerald-500/40 transform hover:scale-110 transition-all" aria-label="WhatsApp 查詢">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Confirmation Modal (Hidden by Default) -->
+    <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
+        <div class="glass-card max-w-lg w-full p-8 rounded-3xl border border-cyan-500/40 text-center relative animate-fade-in">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 border border-emerald-500/40">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white mb-2">預約申請已成功提交！</h3>
+            <p class="text-slate-300 text-sm mb-6">
+                感謝您選擇 MATHSNCODE！我們已收到您的資訊，導師團隊將於 24 小時內親自與您聯絡安排時間。
+            </p>
+
+            <div class="bg-slate-900/90 p-4 rounded-xl text-left text-xs text-slate-300 space-y-2 mb-6 border border-slate-800">
+                <p><strong>家長姓名：</strong><span id="modal-parent-name"></span></p>
+                <p><strong>學生年級：</strong><span id="modal-student-grade"></span></p>
+                <p><strong>意向課程：</strong><span id="modal-course"></span></p>
+                <p><strong>希望時段：</strong><span id="modal-time"></span></p>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <a id="whatsapp-quick-link" href="#" target="_blank" class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold flex items-center justify-center gap-2 transition-colors">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>直接經 WhatsApp 快速與黃老師團隊聯絡</span>
+                </a>
+                <button onclick="closeModal()" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold transition-colors">
+                    關閉視窗
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive JavaScript Logic -->
+    <script>
+        // Tab dynamic contents
+        const tabData = {
+            primary: {
+                title: '小學專區 (P.1 - P.6) - 奠定邏輯與數學根基',
+                desc: '針對小學生發展黃金期，結合奧數思維與直觀引導，拒絕枯燥死記，培養解決問題自信心。',
+                points: [
+                    '獨家自製小學工作紙，融入奧數思維啟發',
+                    '1:3 極緻小班，即時解答課堂疑難',
+                    '小學邏輯編程，將數學圖形與程式運算結合',
+                    '輕鬆課堂氣氛，不增加額外作業壓力'
+                ]
+            },
+            secondary: {
+                title: '中學專區 (S.1 - S.6) - 攻克考評與精準解題',
+                desc: '黃老師憑藉 20 年中學數學教學及考試評分準則研究，為學生拆解 DSE 及校內試解題密碼。',
+                points: [
+                    '深諳考試評分準則，精準評級與拔尖',
+                    '獨家快速解題技巧，化繁為簡攻克難題',
+                    '95% 高合格率戰績，實體課堂極高互動',
+                    '彈性時間安排，配合中學生繁忙校日程'
+                ]
+            },
+            coding: {
+                title: '專科編程課程 - 培養未來科技靈魂',
+                desc: '編程是未來的通用語言！透過系統化邏輯訓練，讓學生由遊戲創作者變成邏輯思考家。',
+                points: [
+                    '運算思維 (Computational Thinking) 專屬訓練',
+                    '從 Scratch/Blockly 圖像化邏輯到 Python/Algorithm 實戰',
+                    '提升獨立思考、除錯 (Debugging) 與問題拆解能力',
+                    '數學與編程跨學科結合，相輔相成'
+                ]
+            }
+        };
+
+        function switchTab(type) {
+            // Update active styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn px-6 py-2.5 rounded-full font-semibold text-sm transition-all bg-slate-800 text-slate-300 hover:bg-slate-700';
+            });
+            
+            const activeBtn = document.getElementById(`tab-${type}`);
+            if (activeBtn) {
+                activeBtn.className = 'tab-btn px-6 py-2.5 rounded-full font-semibold text-sm transition-all bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg';
+            }
+
+            // Render Content
+            const data = tabData[type];
+            const contentContainer = document.getElementById('tab-content');
+            
+            contentContainer.innerHTML = `
+                <h4 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-star text-amber-400 text-base"></i> ${data.title}
+                </h4>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">${data.desc}</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    ${data.points.map(p => `
+                        <div class="flex items-center gap-3 bg-slate-900/60 p-3.5 rounded-xl border border-slate-800/80">
+                            <i class="fa-solid fa-circle-check text-cyan-400 shrink-0"></i>
+                            <span class="text-sm text-slate-200">${p}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Initialize default tab
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('primary');
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // FAQ Toggle
+        function toggleFaq(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const parentName = document.getElementById('parent-name').value;
+            const parentPhone = document.getElementById('parent-phone').value;
+            const studentGrade = document.getElementById('student-grade').value;
+            const courseInterest = document.getElementById('course-interest').value;
+            const preferredTime = document.getElementById('preferred-time').value;
+            const remarks = document.getElementById('remarks').value;
+
+            // Fill Modal
+            document.getElementById('modal-parent-name').textContent = parentName + ` (${parentPhone})`;
+            document.getElementById('modal-student-grade').textContent = studentGrade;
+            document.getElementById('modal-course').textContent = courseInterest;
+            document.getElementById('modal-time').textContent = preferredTime;
+
+            // Create customized WhatsApp Quick Link
+            const waText = encodeURIComponent(
+                `你好！我是 ${parentName} (電話: ${parentPhone})，想為【${studentGrade}】學生預約首堂免費評估及體驗。\n` +
+                `意向課程：${courseInterest}\n` +
+                `偏好時間：${preferredTime}\n` +
+                (remarks ? `其他備註：${remarks}` : '')
+            );
+            
+            document.getElementById('whatsapp-quick-link').href = `https://wa.me/?text=${waText}`;
+
+            // Show Modal
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
